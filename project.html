@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flavorscape Restaurant
+     <link rel="stylesheet" href="styles.css">
+
+  </title>
+  <style>
+  :root {
+  --primary: #b23f3f;
+  --accent: #f8c471;
+  --bg-light: #fffaf5;
+  --bg-dark: #1c1c1c;
+  --text-light: #333;
+  --text-dark: #f0f0f0;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg-light);
+  color: var(--text-light);
+  transition: background 0.5s, color 0.5s;
+  scroll-behavior: smooth;
+}
+
+body.dark-mode {
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+body.dark-mode section,
+body.dark-mode .testimonial-card,
+body.dark-mode .dish-card,
+body.dark-mode .carousel-item {
+  background: #2c2c2c;
+  color: var(--text-dark);
+}
+
+body.dark-mode .menu-card {
+  background: #3a3a3a;
+  border-color: #555;
+}
+
+body.dark-mode .toggle-theme {
+  background: var(--accent);
+  color: #1c1c1c;
+}
+
+/* Header & Navigation */
+header {
+  background: var(--primary);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.toggle-theme {
+  background: white;
+  color: var(--primary);
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  background: url("https://images.unsplash.com/photo-1555992336-03a23c4a7f2b?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 6rem 2rem;
+  position: relative;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+}
+
+.hero h2,
+.hero p,
+.hero button {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.hero button {
+  padding: 0.7rem 1.5rem;
+  background: var(--accent);
+  border: none;
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.hero button:hover {
+  background: #f5b041;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 12px;
+  margin-top: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Sections */
+section {
+  padding: 2rem;
+  margin: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.animated-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.animated-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Carousel */
+.carousel {
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.carousel-track {
+  display: flex;
+  animation: scroll 10s linear infinite;
+}
+
+.carousel-item {
+  min-width: 200px;
+  margin-right: 2rem;
+  background: var(--accent);
+  padding: 1rem;
+  border-radius: 8px;
+  color: #333;
+  font-weight: bold;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Menu Cards */
+.menu-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.menu-card {
+  background: #fffaf0;
+  border: 1px solid #eee;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 220px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.menu-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+/* Testimonials */
+.testimonial-card {
+  background: #fffaf0;
+  border-left: 5px solid var(--primary);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Form */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 400px;
+  margin: auto;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  padding: 10px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background: #922b21;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 10px;
+  background: var(--primary);
+  color: white;
+}
+
+/* About Section */
+#about img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Featured Dishes */
+.featured-dishes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.dish-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 1rem;
+  border-radius: 8px;
+  width: 220px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(30px);
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+
+.dish-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.dish-card.fade-in.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Image Overlay Text */
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+.image-text {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+  color: #f8c471; /* Accent color for better contrast */
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  border-radius: 4px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 700px) {
+  #about div {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero h2 {
+    font-size: 2rem;
+  }
+
+  .menu-items,
+  .featured-dishes {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+/* ✅ CSS STYLING */
+header {
+  background: var(--primary);
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.branding h1 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.tagline {
+  font-size: 0.95rem;
+  margin-top: 4px;
+  font-style: italic;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.header-extras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.contact-info a,
+.location {
+  color: white;
+  font-weight: bold;
+  margin-right: 1rem;
+  text-decoration: none;
+}
+
+.social-icons img {
+  vertical-align: middle;
+  margin: 0 5px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.1);
+}
+
+.toggle-theme {
+  background: white;
+  color: var(--primary);
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+body.dark-mode .toggle-theme {
+  background: var(--accent);
+  color: #1c1c1c;
+}
+/* Base text color for light mode */
+body {
+  color: var(--text-light); /* #333 is a solid choice */
+}
+
+/* Ensure text inside cards and sections is readable */
+.menu-card,
+.testimonial-card,
+.dish-card,
+.hero,
+section {
+  color: var(--text-light);
+}
+
+/* Optional: For any inline or dynamic text */
+.special-text {
+  color: var(--text-light);
+  font-weight: bold;
+}
+
+/* If you have white or pale backgrounds, darken slightly for contrast */
+.menu-card,
+.testimonial-card,
+.dish-card {
+  background: #fef6e8; /* Slightly darker than #fffaf0 */
+}
+.hero {
+  background: linear-gradient(to right, #b23f3f, #e74c3c);
+  color: white;
+}
+
+section {
+  background: linear-gradient(to bottom, #fffaf5, #fef6e8);
+}
+:root {
+  --primary: #b23f3f;
+  --accent: #f8c471;
+  --highlight: #58d68d; /* NEW vibrant green */
+}
+
+.hero button,
+button[type="submit"] {
+  background: var(--highlight);
+  color: white;
+}
+
+.hero button:hover {
+  background: #45c67a;
+}
+.menu-card,
+.dish-card,
+.testimonial-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.menu-card:hover,
+.dish-card:hover {
+  transform: translateY(-5px);
+}
+.hero {
+  border: 4px solid;
+  border-image: linear-gradient(to right, #f8c471, #58d68d) 1;
+}
+  </style>
+</head>
+
+<body>
+<!-- ✅ HTML HEADER -->
+<header>
+  <div class="branding">
+    <h1>Flavorscape</h1>
+    <p class="tagline">Taste. Elegance. Experience.</p>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Menu</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+    </ul>
+  </nav>
+
+  <div class="header-extras">
+    <div class="contact-info">
+      <a href="tel:+911234567890">📞 +91 12345 67890</a>
+      <a href="mailto:info@flavorscape.com">✉️ info@flavorscape.com</a>
+    </div>
+
+    <div class="location">📍 New Delhi, India</div>
+
+    <div class="social-icons">
+      <a href="https://facebook.com/flavorscape" target="_blank" rel="noopener">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="24" height="24" />
+      </a>
+      <a href="https://instagram.com/flavorscape" target="_blank" rel="noopener">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="24" height="24" />
+      </a>
+      <a href="https://twitter.com/flavorscape" target="_blank" rel="noopener">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" width="24" height="24" />
+      </a>
+    </div>
+
+    <button class="toggle-theme" onclick="toggleTheme()">Dark Mode</button>
+  </div>
+</header>
+
+  <section id="home" class="hero">
+    <h2>Where Flavor Meets Fantasy</h2>
+    <p>Experience gourmet dining like never before</p>
+    <button onclick="loadSpecial()">Reserve Your Table</button>
+    <div id="dynamicContent"></div>
+
+   <div class="featured-dishes">
+  <div class="dish-card fade-in">
+    <div class="image-container">
+      <img src="https://www.thespruceeats.com/thmb/H0YjdoMIhz0VqvbQskQYq3VWnqo=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/BakedStuffedLobster-TheSpruce_DianaChistruga-3fcb6301491a4be193ecf40d0735e8d1.jpg" alt="Stuffed Lobster" />
+      <div class="image-text">Signature Dish</div>
+    </div>
+    <h3>Stuffed Lobster</h3>
+    <p>Butter-poached with herb stuffing</p>
+  </div>
+
+  <div class="dish-card fade-in">
+    <div class="image-container">
+      <img src="https://i.ndtvimg.com/i/2017-10/gourmet-620_620x350_71507112783.jpg" alt="Gourmet Platter" />
+      <div class="image-text">Chef’s Pick</div>
+    </div>
+    <h3>Gourmet Platter</h3>
+    <p>Chef’s selection of seasonal bites</p>
+  </div>
+
+  <div class="dish-card fade-in">
+    <div class="image-container">
+      <img src="https://www.bhg.com/thmb/n6PgOSjqcvGxWhZF5nIhCHwGlFI=/1244x0/filters:no_upscale():strip_icc()/steamed-crab-legs-RU314122-4f003b1258f3499d81681be426953611.jpg" alt="Crab Legs" />
+      <div class="image-text">Customer Favorite</div>
+    </div>
+    <h3>Steamed Crab Legs</h3>
+    <p>Served with garlic butter dip</p>
+  </div>
+</div>
+    </div>
+  </section>
+
+  <section id="about" class="animated-section">
+    <h2>About Us</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=600&q=80"
+           alt="Our Team at Flavorscape"
+           style="width: 100%; max-width: 400px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" />
+      <div style="flex: 1; min-width: 250px;">
+        <p>At Flavorscape, we believe dining is more than just food — it's a journey of taste, ambiance, and emotion.</p>
+        <p>Founded by culinary artists and hospitality dreamers, our team blends global flavors with local warmth to craft unforgettable experiences.</p>
+        <p>Whether you're here for a romantic dinner, a family celebration, or a solo indulgence, we promise to serve you with passion and precision.</p>
+        <p><strong>Our philosophy:</strong> Fresh ingredients, bold flavors, and heartfelt service — every plate tells a story.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="animated-section">
+    <h2>Our Menu</h2>
+
+    <div class="carousel">
+      <h3>Chef’s Specials</h3>
+      <div class="carousel-track">
+        <div class="carousel-item">Truffle Risotto 🍄</div>
+        <div class="carousel-item">Spicy Thai Noodles 🌶️</div>
+        <div class="carousel-item">Berry Cheesecake 🍓</div>
+      </div>
+    </div>
+
+    <div class="menu-items">
+      <div class="menu-card">
+        <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=400&q=80"
+          alt="Grilled Salmon" class="menu-img" />
+        <h3>Grilled Salmon</h3>
+        <p>Served with lemon butter sauce</p>
+        <p style="font-weight: bold; color: var(--primary)">₹850</p>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://www.lafujimama.com/wp-content/uploads/2018/05/Vegetarian-Delight-5-BLOG.jpg"
+          alt="Veggie Delight" class="menu-img" />
+        <h3>Veggie Delight</h3>
+        <p>Seasonal vegetables with herbs</p>
+        <p style="font-weight: bold; color: var(--primary)">₹620</p>
+      </div>
+
+      <div class="menu-card">
+        <img src="https://sallysbakingaddiction.com/wp-content/uploads/2017/02/chocolate-molten-lava-cakes.jpg"
+          alt="Chocolate Lava Cake" class="menu-img" />
+        <h3>Chocolate Lava Cake</h3>
+        <p>Warm and gooey with vanilla ice cream</p>
+        <p style="font-weight: bold; color: var(--primary)">₹450</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="animated-section">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required />
+      <input type="email" id="email" placeholder="Your Email" required />
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div id="formResponse"></div>
+  </section>
+
+  <section id="testimonials" class="animated-section">
+    <h2>What Our Guests Say</h2>
+    <div class="testimonial-card">
+      <p>"Absolutely divine! The ambiance and food were perfect." – Riya S.</p>
+    </div>
+    <div class="testimonial-card">
+      <p>"Best chocolate lava cake I've ever had!" – Aarav M.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Flavorscape Restaurant</p>
+  </footer>
+</body>
+
+  <script>
+  // Run this code after the page has fully loaded
+  document.addEventListener("DOMContentLoaded", () => {
+    // Animate sections when they come into view
+    const animatedSections = document.querySelectorAll(".animated-section");
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible"); // Show the section
+          observer.unobserve(entry.target); // Stop watching it
+        }
+      });
+    });
+    animatedSections.forEach((section) => sectionObserver.observe(section));
+
+    // Animate dish cards when they come into view
+    const dishCards = document.querySelectorAll(".dish-card");
+    const dishObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible"); // Show the card
+          observer.unobserve(entry.target); // Stop watching it
+        }
+      });
+    });
+    dishCards.forEach((card) => dishObserver.observe(card));
+
+    // Handle contact form submission
+    const contactForm = document.getElementById("contactForm");
+    if (contactForm) {
+      contactForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // Stop the page from reloading
+
+        // Get user input
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+        const responseDiv = document.getElementById("formResponse");
+
+        // Check if all fields are filled
+        if (!name || !email || !message) {
+          responseDiv.innerHTML = '<p style="color:red;">Please fill out all fields.</p>';
+          return;
+        }
+
+        // Show success message and reset form
+        responseDiv.innerHTML = `<p style="color:green;">Thank you, ${name}! Your message has been sent.</p>`;
+        contactForm.reset();
+      });
+    }
+
+    // Highlight the current section in the navigation bar
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
+
+    window.addEventListener("scroll", () => {
+      let currentSection = "";
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 60 && rect.bottom >= 60) {
+          currentSection = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active");
+        if (link.getAttribute("href").includes(currentSection)) {
+          link.classList.add("active");
+        }
+      });
+    }, { passive: true });
+  });
+
+  // Show today's special dish
+  function loadSpecial() {
+    const contentDiv = document.getElementById("dynamicContent");
+    if (contentDiv) {
+      contentDiv.innerHTML = '<p style="margin-top:1rem;">Today\'s Special: Truffle Risotto with wild mushrooms 🍄</p>';
+    }
+  }
+
+  // Toggle between dark and light mode
+  function toggleTheme() {
+    document.body.classList.toggle("dark-mode"); // Switch theme
+    const isDark = document.body.classList.contains("dark-mode");
+    const toggleBtn = document.querySelector(".toggle-theme");
+    if (toggleBtn) {
+      toggleBtn.textContent = isDark ? "Light Mode" : "Dark Mode";
+    }
+  }
+</script>
+</body>
+
+</html>
